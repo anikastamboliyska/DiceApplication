@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script src = "script.js"></script>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content
+        ="width=device-width, initial-scale=1.0">
+    <title>Dice Game</title>
+
+    <script>
+        var count = 0, c1 = 0, c2 = 0, c3 = 0, c4 = 0, c5 = 0, c6 = 0;
+        var persent = 0, p1 = 0, p2 = 0, p3 = 0, p4 = 0, c5 = 0, c6 = 0;
+
+        function sumTimes(){
+            return c1 + c2 + c3 + c4 + c5 + c6;
+        }
+        function calcPercent(count){
+            let percent = count / sumTimes() * 100;
+            return (Math.round((percent + Number.EPSILON) * 100) / 100) + '%';
+        }
+
+        function assignAllPercents(){
+            document.getElementById('p1').innerHTML = calcPercent(c1);
+            document.getElementById('p2').innerHTML = calcPercent(c2);
+            document.getElementById('p3').innerHTML = calcPercent(c3);
+            document.getElementById('p4').innerHTML = calcPercent(c4);
+            document.getElementById('p5').innerHTML = calcPercent(c5);
+            document.getElementById('p6').innerHTML = calcPercent(c6);
+        }
+        function rollTheDice() {
+            var randomNumber1 = Math.floor(Math.random() * 6) + 1;
+                document.querySelector(".img1").setAttribute("src",
+                "dice" + randomNumber1 + ".png");
+            
+            switch(randomNumber1){
+                case 1:
+                    c1++;
+                    p1 = calcPercent(c1);
+                    document.getElementById('c1').innerHTML = c1;
+                    break;
+                case 2:
+                    c2++;
+                    p2 = calcPercent(c2);
+                    document.getElementById('c2').innerHTML = c2;
+                    break;
+                case 3:
+                    c3++;
+                    p3 = calcPercent(c3);
+                    document.getElementById('c3').innerHTML = c3;
+                    break;
+                case 4:
+                    c4++;
+                    p4 = calcPercent(c4);
+                    document.getElementById('c4').innerHTML = c4;
+                    break;
+                case 5:
+                    c5++;
+                    p5 = calcPercent(c5);
+                    document.getElementById('c5').innerHTML = c5;
+                    break;
+                case 6:
+                    c6++;
+                    p6 = calcPercent(c6);
+                    document.getElementById('c6').innerHTML = c6;
+                    break;
+            }
+            count++;
+            document.getElementById('c').innerHTML = count;
+            percent = '100%';
+            document.getElementById('p').innerHTML = percent;
+            assignAllPercents();
+        }
+    </script>
+</head>
+
+<body>
+    <div class="container bottom">
+        <button type="button" class="button"
+            onClick="rollTheDice()">
+            Roll the Dice
+        </button>
+    </div>
+    <div class="container">
+
+        <div class="dice">
+            <img class="img1" src="dice6.png">
+        </div>
+    </div>
+
+    <table border="1">
+        <tr>
+            <td> Number</td>
+            <td> Count</td>
+            <td> Percentage</td>
+        </tr>
+        <tr>
+            <td>  All</td>
+            <td id="c">0</td>
+            <td id="p">0</td>
+        </tr>
+        <tr>
+            <td>  1</td>
+            <td id="c1">0</td>
+            <td id="p1">0</td>
+        </tr>
+        <tr>
+            <td> 2</td>
+            <td id="c2">0</td>
+            <td id="p2">0</td>
+        </tr>
+        <tr>
+            <td> 3</td>
+            <td id="c3">0</td>
+            <td id="p3">0</td>
+        </tr>
+        <tr>
+            <td> 4</td>
+            <td id="c4">0</td>
+            <td id="p4">0</td>
+        </tr>
+        <tr>
+            <td> 5</td>
+            <td id="c5">0</td>
+            <td id="p5">0</td>
+        </tr>
+        <tr>
+            <td> 6</td>
+            <td id="c6">0</td>
+            <td id="p6">0</td>
+        </tr>
+    </table>
+
+    <div id="piechart"></div>
+</body>
+
+<!DOCTYPE html>
+<html lang="en-US">
+<body>
+
+<h1>My Web Page</h1>
+
+<div id="piechart"></div>
+
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
+<script type="text/javascript">
+// Load google charts
+google.charts.load('current', {'packages':['corechart']});
+google.charts.setOnLoadCallback(drawChart);
+
+// Draw the chart and set the chart values
+function drawChart() {
+  var data = google.visualization.arrayToDataTable([
+  ['Task', 'Hours per Day'],
+  ['Work', 8],
+  ['Eat', 2],
+  ['TV', 4],
+  ['Gym', 2],
+  ['Sleep', 8]
+]);
+
+  // Optional; add a title and set the width and height of the chart
+  var options = {'title':'My Average Day', 'width':550, 'height':400};
+
+  // Display the chart inside the <div> element with id="piechart"
+  var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+  chart.draw(data, options);
+}
+</script>
+
+</body>
+</html>
